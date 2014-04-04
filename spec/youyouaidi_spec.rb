@@ -21,20 +21,42 @@ describe Youyouaidi do
       end
     end
 
-    describe '#uuid' do
-      let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
-      let(:uuid) { Youyouaidi::UUID.new param }
-      subject { uuid.uuid }
-
-      it { should eq param }
-    end
-
     describe '#to_s' do
-      let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
-      let(:uuid) { Youyouaidi::UUID.new param }
+      let(:uuid_string) { '550e8400-e29b-41d4-a716-446655440000' }
+      let(:uuid) { Youyouaidi::UUID.new uuid_string }
       subject { uuid.to_s }
 
-      it { should eq param }
+      it { should be_a String }
+      it { should eq uuid_string }
+    end
+
+    describe '#to_i' do
+      let(:uuid_string) { '550e8400-e29b-41d4-a716-446655440000' }
+      let(:uuid) { Youyouaidi::UUID.new uuid_string }
+      subject { uuid.to_i }
+
+      it { should be_a Bignum }
+      it { should eq 113059749145936325402354257176981405696 }
+    end
+
+    shared_examples_for 'method for short format' do
+      let(:uuid_string) { '550e8400-e29b-41d4-a716-446655440000' }
+      let(:encoded_uuid) { '_oGOAbD9fsFFEHWSMal1v' }
+      let(:uuid) { Youyouaidi::UUID.new uuid_string }
+
+      let(:action) { uuid.send method }
+      subject { action }
+
+      it { should be_a String }
+      it { should eq encoded_uuid }
+    end
+    describe '#to_short_string' do
+      let(:method) { :to_short_string }
+      it_behaves_like 'method for short format'
+    end
+    describe '#to_param' do
+      let(:method) { :to_param }
+      it_behaves_like 'method for short format'
     end
 
     describe '.valid_uuid?' do
@@ -56,25 +78,6 @@ describe Youyouaidi do
           end
         end
       end
-    end
-  end
-
-  describe Youyouaidi::URLify do
-    let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
-    let(:uuid) { Youyouaidi::UUID.new param }
-
-    describe '.encode' do
-      context 'with valid uuid' do
-
-      end
-
-      context 'with invalid uuid' do
-
-      end
-    end
-
-    describe '.decode' do
-
     end
   end
 end
