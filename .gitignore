@@ -1,11 +1,9 @@
 *.gem
 *.rbc
-.rbx
 .bundle
 .config
 .yardoc
-doc
-Gemfile*.lock
+Gemfile.lock
 InstalledFiles
 _yardoc
 coverage
@@ -17,7 +15,3 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-.idea
-*.iml
-.rvmrc
-.ruby-version
