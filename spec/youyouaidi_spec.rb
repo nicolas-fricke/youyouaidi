@@ -6,17 +6,33 @@ describe Youyouaidi do
       let(:param) { '' }
       subject { Youyouaidi::UUID.new param }
 
-      context 'with valid uuid' do
+      context 'with valid uuid string' do
         let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
 
         it { should be_a Youyouaidi::UUID }
       end
 
-      context 'with invalid uuid' do
+      context 'with uuid in short format' do
+          let(:param) { '_oGOAbD9fsFFEHWSMal1v' }
+          let(:decoded_uuid) { '550e8400-e29b-41d4-a716-446655440000' }
+
+          it { should be_a Youyouaidi::UUID }
+          its(:to_s) { should eq decoded_uuid }
+      end
+
+      context 'with invalid uuid string' do
         let(:param) { 'Kekse' }
 
         it 'raises error' do
-          expect { Youyouaidi::UUID.new param }.to raise_error
+          expect { Youyouaidi::UUID.new param }.to raise_error ArgumentError
+        end
+      end
+
+      context 'with non-string input' do
+        let(:param) { 1234 }
+
+        it 'raises error' do
+          expect { Youyouaidi::UUID.new param }.to raise_error ArgumentError
         end
       end
     end
