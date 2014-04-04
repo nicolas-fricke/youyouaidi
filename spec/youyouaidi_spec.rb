@@ -58,4 +58,23 @@ describe Youyouaidi do
       end
     end
   end
+
+  describe Youyouaidi::URLify do
+    let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
+    let(:uuid) { Youyouaidi::UUID.new param }
+
+    describe '.encode' do
+      context 'with valid uuid' do
+
+      end
+
+      context 'with invalid uuid' do
+
+      end
+    end
+
+    describe '.decode' do
+
+    end
+  end
 end
