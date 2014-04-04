@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
+
+Youyouaidi::UUID.valid_uuid? uuid_string # => true
+
+uuid = Youyouaidi::UUID.new uuid_string # creates new UUID object, alternatively a short UUID can also be passed
+uuid.to_s # => '550e8400-e29b-41d4-a716-446655440000'
+uuid.to_short_s # => '_oGOAbD9fsFFEHWSMal1v', alias for method: #to_param
+```
 
 ## Contributing
 
