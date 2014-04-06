@@ -7,7 +7,7 @@ class Youyouaidi::Converter
     end
 
     def decode(encoded_uuid)
-      base_decode encoded_uuid
+      decode_short_string base_decode encoded_uuid
     end
 
     private
@@ -38,6 +38,11 @@ class Youyouaidi::Converter
           end
         end
         total
+      end
+
+      def decode_short_string(short_uuid_string)
+        uuid = short_uuid_string.to_i.to_s(16)
+        "#{uuid[0,8]}-#{uuid[8,4]}-#{uuid[12,4]}-#{uuid[16,4]}-#{uuid[20,12]}"
       end
   end
 end
