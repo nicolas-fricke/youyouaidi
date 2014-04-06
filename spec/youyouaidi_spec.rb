@@ -75,9 +75,9 @@ describe Youyouaidi do
       it_behaves_like 'method for short format'
     end
 
-    describe '.valid_uuid?' do
+    describe '.valid?' do
       let(:param) { '' }
-      subject { Youyouaidi::UUID.valid_uuid? param }
+      subject { Youyouaidi::UUID.valid? param }
 
       context 'with valid uuid' do
         let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
@@ -90,7 +90,7 @@ describe Youyouaidi do
 
         invalid_uuids.each do |invalid_uuid|
           it "should return false for `#{invalid_uuid}`" do
-            expect(Youyouaidi::UUID.valid_uuid? invalid_uuid).to eq false
+            expect(Youyouaidi::UUID.valid? invalid_uuid).to eq false
           end
         end
       end

@@ -26,7 +26,7 @@ Or install it yourself as:
 uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
 uuid_short  = '_oGOAbD9fsFFEHWSMal1v'                # Same UUID in its short format
 
-Youyouaidi::UUID.valid_uuid? uuid_string # => true
+Youyouaidi::UUID.valid? uuid_string # => true
 
 uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.new uuid_string into kernel.
 # => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">

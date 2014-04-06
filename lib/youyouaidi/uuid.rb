@@ -3,11 +3,11 @@ class Youyouaidi::UUID
 
   def initialize(uuid_param, options = {})
     @converter = options[:converter] || Youyouaidi::Converter
-    if self.class.valid_uuid? uuid_param
+    if self.class.valid? uuid_param
       @uuid = uuid_param.to_s
     else
       @uuid = decode_short_string uuid_param
-      raise ArgumentError.new "`#{uuid_param}' could not be converted to valid UUID" unless self.class.valid_uuid? @uuid
+      raise ArgumentError.new "`#{uuid_param}' could not be converted to valid UUID" unless self.class.valid? @uuid
     end
   end
 
@@ -31,7 +31,7 @@ class Youyouaidi::UUID
   end
 
   class << self
-    def valid_uuid?(uuid_canidate)
+    def valid?(uuid_canidate)
       (uuid_canidate.to_s =~ /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/i) == 0
     end
   end
