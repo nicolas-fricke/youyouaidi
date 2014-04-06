@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-group :development, :test do
-  gem 'rspec'
-  gem 'rspec-its'
-end
+gem 'rspec'
 
 group :test do
   gem 'rake', '~> 10.1'
