@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rspec'
-gem 'rspec-its'
+group :development, :test do
+  gem 'rspec', '~> 2.14'
+  gem 'rspec-its'
+end
+
+group :test do
+  gem 'rake', '~> 10.1'
+end
 
 # Specify your gem's dependencies in youyouaidi.gemspec
 gemspec
