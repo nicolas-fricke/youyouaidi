@@ -1,5 +1,9 @@
 # Youyouaidi
 
+[![Gem Version](https://badge.fury.io/rb/youyouaidi.svg)](https://rubygems.org/gems/youyouaidi)
+[![Build Status](https://travis-ci.org/nicolas-fricke/youyouaidi.svg)](https://travis-ci.org/nicolas-fricke/youyouaidi)
+
+
 Ruby Gem `Youyouaidi` offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
 
 ## Installation
