@@ -7,7 +7,7 @@ class Youyouaidi::UUID
       @uuid = uuid_param.to_s
     else
       @uuid = @converter.decode uuid_param
-      raise ArgumentError.new "`#{uuid_param}' could not be converted to valid UUID" unless self.class.valid? @uuid
+      raise Youyouaidi::InvalidUUID.new "`#{uuid_param}' could not be converted to valid UUID" unless self.class.valid? @uuid
     end
   end
 

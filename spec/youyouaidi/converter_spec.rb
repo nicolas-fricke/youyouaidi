@@ -23,6 +23,14 @@ describe Youyouaidi::Converter do
       subject { described_class.decode encoded_uuid }
 
       it { should eq uuid_string }
+
+      context 'with invalid characters' do
+        let(:encoded_uuid) { ' '}
+
+        it 'raises error' do
+          expect { subject }.to raise_error Youyouaidi::InvalidUUID
+        end
+      end
     end
   end
 end

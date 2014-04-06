@@ -14,7 +14,7 @@ class Youyouaidi::Converter
       BASE = ('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a + %w(_ - +)
 
       def base_encode(numeric)
-        raise ArgumentError, "`#{numeric}' needs to be a Numeric" unless numeric.is_a? Numeric
+        raise Youyouaidi::InvalidUUID, "`#{numeric}' needs to be a Numeric" unless numeric.is_a? Numeric
 
         return '0' if numeric == 0
         s = ''
@@ -34,7 +34,7 @@ class Youyouaidi::Converter
           if ord = BASE.index(char)
             total += ord * (BASE.size ** index)
           else
-            raise ArgumentError, "`#{encoded_numeric}' has `#{char}' which is not valid"
+            raise Youyouaidi::InvalidUUID, "`#{encoded_numeric}' has `#{char}' which is not valid"
           end
         end
         total
