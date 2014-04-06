@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['mail@nicolasfricke.de']
   spec.summary       = %q{UUID class}
   spec.description   = %q{Youyouaidi offers a UUID class for parsing, validating and encoding UUIDs}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/nicolas-fricke/youyouaidi'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)

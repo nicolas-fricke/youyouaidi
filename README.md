@@ -1,6 +1,6 @@
 # Youyouaidi
 
-Ruby Gem youyouaidi offers a UUID class for parsing, validating and encoding UUIDs
+Ruby Gem `Youyouaidi` offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
 
 ## Installation
 
@@ -20,12 +20,20 @@ Or install it yourself as:
 
 ```ruby
 uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
+uuid_short  = '_oGOAbD9fsFFEHWSMal1v'                # Same UUID in its short format
 
 Youyouaidi::UUID.valid_uuid? uuid_string # => true
 
-uuid = Youyouaidi::UUID.new uuid_string # creates new UUID object, alternatively a short UUID can also be passed
-uuid.to_s # => '550e8400-e29b-41d4-a716-446655440000'
-uuid.to_short_s # => '_oGOAbD9fsFFEHWSMal1v', alias for method: #to_param
+uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.new uuid_string into kernel.
+# => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
+# or alternatively a short UUID can be passed
+uuid = UUID uuid_short    # creates similar Youyouaidi::UUID object
+# => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
+
+uuid.to_s                 # Returns the string representation of the UUID object
+# => '550e8400-e29b-41d4-a716-446655440000'
+uuid.to_short_s           # Returns the short string representation of the UUID object
+# => '_oGOAbD9fsFFEHWSMal1v', alias for method: #to_param
 ```
 
 ## Contributing
