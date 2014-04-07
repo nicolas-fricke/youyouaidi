@@ -8,7 +8,8 @@ describe Youyouaidi::Converter do
   describe 'use case' do
     subject { described_class.decode described_class.encode(uuid) }
 
-    it { should eq uuid_string }
+    it { should be_a Youyouaidi::UUID }
+    its(:to_s) { should eq uuid_string }
   end
 
   describe 'methods' do
@@ -22,10 +23,11 @@ describe Youyouaidi::Converter do
     describe '.decode' do
       subject { described_class.decode encoded_uuid }
 
-      it { should eq uuid_string }
+      it { should be_a Youyouaidi::UUID }
+      its(:to_s) { should eq uuid_string }
 
       context 'with invalid characters' do
-        let(:encoded_uuid) { ' '}
+        let(:encoded_uuid) { ' ' }
 
         it 'raises error' do
           expect { subject }.to raise_error Youyouaidi::InvalidUUIDError

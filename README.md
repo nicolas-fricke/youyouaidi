@@ -28,7 +28,7 @@ uuid_short  = '_oGOAbD9fsFFEHWSMal1v'                # Same UUID in its short fo
 
 Youyouaidi::UUID.valid? uuid_string # => true
 
-uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.new uuid_string into kernel.
+uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.parse uuid_string into kernel.
 # => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
 # or alternatively a short UUID can be passed
 uuid = UUID uuid_short    # creates similar Youyouaidi::UUID object

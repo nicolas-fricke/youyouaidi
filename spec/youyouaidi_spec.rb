@@ -4,7 +4,36 @@ describe Youyouaidi do
   describe Youyouaidi::UUID do
     describe '.new' do
       let(:param) { '' }
-      subject { Youyouaidi::UUID.new param }
+      let(:action) { Youyouaidi::UUID.new param }
+      subject { -> { action } }
+
+      context 'with valid uuid string' do
+        let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
+        subject { action }
+
+        it { should be_a Youyouaidi::UUID }
+      end
+
+      context 'with uuid in short format' do
+        let(:param) { '_oGOAbD9fsFFEHWSMal1v' }
+        it { should raise_error Youyouaidi::InvalidUUIDError }
+      end
+
+      context 'with invalid uuid string' do
+        let(:param) { 'Kekse' }
+        it { should raise_error Youyouaidi::InvalidUUIDError }
+      end
+
+      context 'with non-uuid-string input' do
+        let(:param) { 1234 }
+        it { should raise_error Youyouaidi::InvalidUUIDError }
+      end
+    end
+
+    describe '.parse' do
+      let(:param) { '' }
+      let(:action) { Youyouaidi::UUID.parse param }
+      subject { action }
 
       context 'with valid uuid string' do
         let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
@@ -24,7 +53,7 @@ describe Youyouaidi do
         let(:param) { 'Kekse' }
 
         it 'raises error' do
-          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUIDError
+          expect { Youyouaidi::UUID.parse param }.to raise_error Youyouaidi::InvalidUUIDError
         end
       end
 
@@ -32,7 +61,7 @@ describe Youyouaidi do
         let(:param) { 1234 }
 
         it 'raises error' do
-          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUIDError
+          expect { Youyouaidi::UUID.parse param }.to raise_error Youyouaidi::InvalidUUIDError
         end
       end
     end

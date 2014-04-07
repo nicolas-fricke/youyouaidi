@@ -1,14 +1,10 @@
 class Youyouaidi::UUID
   attr_reader :uuid
 
-  def initialize(uuid_param, options = {})
+  def initialize(uuid_string, options = {})
     @converter = options[:converter] || Youyouaidi::Converter
-    if self.class.valid? uuid_param
-      @uuid = uuid_param.to_s
-    else
-      @uuid = @converter.decode uuid_param
-      raise Youyouaidi::InvalidUUIDError.new "`#{uuid_param}' could not be converted to valid UUID" unless self.class.valid? @uuid
-    end
+    raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' could not be converted to valid UUID" unless self.class.valid? uuid_string
+    @uuid = uuid_string.to_s
   end
 
   def to_i
@@ -27,6 +23,17 @@ class Youyouaidi::UUID
   private
 
   class << self
+    def parse(uuid_param, options = {})
+      @converter = options[:converter] || Youyouaidi::Converter
+      if valid? uuid_param
+        self.new uuid_param.to_s, options
+      else
+        uuid_obj = @converter.decode uuid_param
+        raise Youyouaidi::InvalidUUIDError.new "`#{uuid_param}' could not be converted to valid UUID" unless valid? uuid_obj.to_s
+        uuid_obj
+      end
+    end
+
     def valid?(uuid_canidate)
       (uuid_canidate.to_s =~ /[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/i) == 0
     end
