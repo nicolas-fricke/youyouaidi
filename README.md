@@ -22,22 +22,56 @@ Or install it yourself as:
 
 ## Usage
 
+### Initializing UUIDs
+
 ```ruby
 uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
 uuid_short  = '_oGOAbD9fsFFEHWSMal1v'                # Same UUID in its short format
 
-Youyouaidi::UUID.valid? uuid_string # => true
-
 uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.parse uuid_string into kernel.
 # => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
-# or alternatively a short UUID can be passed
+
+# Alternatively a short UUID can be passed:
 uuid = UUID uuid_short    # creates similar Youyouaidi::UUID object
 # => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
+```
+
+
+### Validity check and conversions
+
+```ruby
+uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
+uuid = UUID uuid_string
+
+Youyouaidi::UUID.valid? uuid_string # => true
 
 uuid.to_s                 # Returns the string representation of the UUID object
 # => '550e8400-e29b-41d4-a716-446655440000'
+
 uuid.to_short_s           # Returns the short string representation of the UUID object
 # => '_oGOAbD9fsFFEHWSMal1v', alias for method: #to_param
+```
+
+
+### Comparing UUIDs
+
+```ruby
+uuid_string  = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
+uuid         = UUID uuid_string
+similar_uuid = UUID uuid_string
+other_uuid   = UUID 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+
+uuid == similar_uuid # Two UUID objects representing same UUID (#=== behaves similar for this)
+# => true
+
+uuid == other_uuid   # Two UUID objects representing different UUIDs (#=== behaves similar for this)
+# => false
+
+uuid == uuid_string  # Comparing a UUID object and its string representation with `=='
+# => false
+
+uuid === uuid_string # Comparing a UUID object and its string representation with `===' (case insensetive)
+# => true
 ```
 
 ## Contributing
