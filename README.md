@@ -1,4 +1,9 @@
-# Youyouaidi [![Gem Version](https://badge.fury.io/rb/youyouaidi.svg)](https://rubygems.org/gems/youyouaidi) [![Build Status](https://travis-ci.org/nicolas-fricke/youyouaidi.svg)](https://travis-ci.org/nicolas-fricke/youyouaidi) [![Coverage Status](http://img.shields.io/coveralls/nicolas-fricke/youyouaidi.svg)](https://coveralls.io/r/nicolas-fricke/youyouaidi) [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
+# Youyouaidi 
+[![Gem Version](https://badge.fury.io/rb/youyouaidi.svg)](https://rubygems.org/gems/youyouaidi) 
+[![Build Status](https://travis-ci.org/nicolas-fricke/youyouaidi.svg)](https://travis-ci.org/nicolas-fricke/youyouaidi)
+[![Coverage Status](http://img.shields.io/coveralls/nicolas-fricke/youyouaidi.svg)](https://coveralls.io/r/nicolas-fricke/youyouaidi)
+[![Code Climate](http://img.shields.io/codeclimate/github/nicolas-fricke/youyouaidi.svg)](https://codeclimate.com/github/nicolas-fricke/youyouaidi)
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
 
 
 Ruby Gem `Youyouaidi` offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
