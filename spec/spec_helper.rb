@@ -3,6 +3,10 @@ require 'rspec'
 require 'bundler'
 Bundler.require
 
+# Code coverage statistics at coveralls.io: https://coveralls.io/r/nicolas-fricke/youyouaidi
+require 'coveralls'
+Coveralls.wear!
+
 require 'youyouaidi'
 
 RSpec.configure do |config|
