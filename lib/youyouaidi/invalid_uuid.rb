@@ -1,2 +1,2 @@
-class Youyouaidi::InvalidUUID < StandardError
+class Youyouaidi::InvalidUUIDError < TypeError
 end

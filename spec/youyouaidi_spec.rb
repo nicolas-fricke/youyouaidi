@@ -24,7 +24,7 @@ describe Youyouaidi do
         let(:param) { 'Kekse' }
 
         it 'raises error' do
-          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUID
+          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUIDError
         end
       end
 
@@ -32,7 +32,7 @@ describe Youyouaidi do
         let(:param) { 1234 }
 
         it 'raises error' do
-          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUID
+          expect { Youyouaidi::UUID.new param }.to raise_error Youyouaidi::InvalidUUIDError
         end
       end
     end

@@ -28,7 +28,7 @@ describe Youyouaidi::Converter do
         let(:encoded_uuid) { ' '}
 
         it 'raises error' do
-          expect { subject }.to raise_error Youyouaidi::InvalidUUID
+          expect { subject }.to raise_error Youyouaidi::InvalidUUIDError
         end
       end
     end

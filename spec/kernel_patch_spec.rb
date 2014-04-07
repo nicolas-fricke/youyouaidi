@@ -27,7 +27,7 @@ describe Kernel do
     context 'initialized with invalid param' do
       let(:param) { 'KEKSE' }
       subject { -> { action } }
-      it { should raise_error Youyouaidi::InvalidUUID }
+      it { should raise_error Youyouaidi::InvalidUUIDError }
     end
   end
 end
