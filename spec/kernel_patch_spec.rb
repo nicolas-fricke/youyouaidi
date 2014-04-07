@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Kernel do
   describe '.UUID' do
     let(:valid_uuid) { '550e8400-e29b-41d4-a716-446655440000' }
-    let(:encoded_uuid) { '_oGOAbD9fsFFEHWSMal1v' }
+    let(:encoded_uuid) { '2AuYQJcZeiIeCymkJ7tzTW' }
     let(:action) { UUID param }
 
     subject { action }

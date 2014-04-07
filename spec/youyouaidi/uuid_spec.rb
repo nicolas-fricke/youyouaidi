@@ -7,15 +7,24 @@ describe Youyouaidi::UUID do
     subject { -> { action } }
 
     context 'with valid uuid string' do
-      let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
       subject { action }
 
-      it { should be_a Youyouaidi::UUID }
-      its(:to_s) { should eq param }
+      uuid_string   = '550e8400-e29b-41d4-a716-446655440000'
+      encoded_uuid  = '2AuYQJcZeiIeCymkJ7tzTW'
+      valid_uuids = ['550e8400-e29b-41d4-a716-446655440000',
+                     '00000000-bbbb-2222-8888-000000000000']
+
+      valid_uuids.each do |valid_uuid|
+        context "for uuid `#{valid_uuid}'" do
+          let(:param) { valid_uuid }
+          it { should be_a Youyouaidi::UUID }
+          its(:to_s) { should eq param }
+        end
+      end
     end
 
     context 'with uuid in short format' do
-      let(:param) { '_oGOAbD9fsFFEHWSMal1v' }
+      let(:param) { '2AuYQJcZeiIeCymkJ7tzTW' }
       it { should raise_error Youyouaidi::InvalidUUIDError }
     end
 
@@ -42,7 +51,7 @@ describe Youyouaidi::UUID do
     end
 
     context 'with uuid in short format' do
-        let(:param) { '_oGOAbD9fsFFEHWSMal1v' }
+        let(:param) { '2AuYQJcZeiIeCymkJ7tzTW' }
         let(:decoded_uuid) { '550e8400-e29b-41d4-a716-446655440000' }
 
         it { should be_a Youyouaidi::UUID }
@@ -68,7 +77,7 @@ describe Youyouaidi::UUID do
 
   shared_examples_for 'equality check for two UUID objects' do
     let(:first_uuid_string)  { 'aaaaaaaa-eeee-4444-aaaa-444444444444' }
-    let(:second_uuid_string) { '00000000-bbbb-2222-6666-000000000000' }
+    let(:second_uuid_string) { '00000000-bbbb-2222-8888-000000000000' }
     let(:first_uuid)  { Youyouaidi::UUID.new first_uuid_string }
     let(:second_uuid) { Youyouaidi::UUID.new second_uuid_string }
 
@@ -168,7 +177,7 @@ describe Youyouaidi::UUID do
 
   shared_examples_for 'method for short format' do
     let(:uuid_string) { '550e8400-e29b-41d4-a716-446655440000' }
-    let(:encoded_uuid) { '_oGOAbD9fsFFEHWSMal1v' }
+    let(:encoded_uuid) { '2AuYQJcZeiIeCymkJ7tzTW' }
     let(:uuid) { Youyouaidi::UUID.new uuid_string }
 
     let(:action) { uuid.send method }
@@ -198,7 +207,7 @@ describe Youyouaidi::UUID do
 
     context 'with invalid uuid' do
       uuid_string   = '550e8400-e29b-41d4-a716-446655440000'
-      encoded_uuid  = '_oGOAbD9fsFFEHWSMal1v'
+      encoded_uuid  = '2AuYQJcZeiIeCymkJ7tzTW'
       invalid_uuids = ['Kekse', "aa#{uuid_string}", "#{uuid_string}bb",
         "#{encoded_uuid}" ]
 

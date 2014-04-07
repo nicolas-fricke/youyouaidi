@@ -7,11 +7,14 @@ class Youyouaidi::Converter
     end
 
     def decode(encoded_uuid)
+      encoded_uuid = encoded_uuid.to_s
+      raise Youyouaidi::InvalidUUIDError.new "`#{encoded_uuid}' needs to have exactly #{ENCODED_LENGTH} characters" unless encoded_uuid.length == ENCODED_LENGTH
       Youyouaidi::UUID.new convert_bignum_to_uuid_string base_decode encoded_uuid
     end
 
     private
-      BASE = ('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a + %w(_ - +)
+      BASE           = ('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a
+      ENCODED_LENGTH = 22 # Needs to be greater than `(Math.log 2**128, BASE.length).floor + 1`
 
       def base_encode(numeric)
         raise Youyouaidi::InvalidUUIDError.new "`#{numeric}' needs to be a Numeric" unless numeric.is_a? Numeric
@@ -22,6 +25,9 @@ class Youyouaidi::Converter
         while numeric > 0
           s << BASE[numeric.modulo(BASE.size)]
           numeric /= BASE.size
+        end
+        while s.length < ENCODED_LENGTH
+          s << BASE[0]
         end
         s.reverse
       end
@@ -41,9 +47,9 @@ class Youyouaidi::Converter
       end
 
       def convert_bignum_to_uuid_string(decoded_uuid_bignum)
-        decoded_uuid = decoded_uuid_bignum.to_i.to_s(16)
+        decoded_uuid = decoded_uuid_bignum.to_i.to_s(16).rjust(32, '0')
         parsed_uuid  = "#{decoded_uuid[0,8]}-#{decoded_uuid[8,4]}-#{decoded_uuid[12,4]}-#{decoded_uuid[16,4]}-#{decoded_uuid[20,12]}"
-        raise Youyouaidi::InvalidUUIDError.new "Converted string `#{parsed_uuid}' has too many characters" if decoded_uuid.length > 32
+        raise Youyouaidi::InvalidUUIDError.new "Converted string `#{decoded_uuid}' has too many characters" if decoded_uuid.length > 32
         parsed_uuid
       end
   end

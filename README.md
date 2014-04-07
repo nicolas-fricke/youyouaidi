@@ -6,7 +6,8 @@
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
 
 
-Ruby Gem `Youyouaidi` offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
+`Youyouaidi` is a Ruby Gem that offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
+While a UUID consists of 32 hexadecimal characters by dashes divided into 5 subgroups, the short representation (invoked via `#to_shrort_string`) consists of exactly 22 digit and lower- and uppercase characters.
 
 ## Installation
 
@@ -27,8 +28,8 @@ Or install it yourself as:
 ### Initializing UUIDs
 
 ```ruby
-uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
-uuid_short  = '_oGOAbD9fsFFEHWSMal1v'                # Same UUID in its short format
+uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format, has exactly 32 hexadecimal characters in 5 groups
+uuid_short  = '2AuYQJcZeiIeCymkJ7tzTW'               # Same UUID in its short format, has exactly 22 characters of [0-9a-zA-Z]
 
 uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyouaidi::UUID.parse uuid_string into kernel.
 # => #<Youyouaidi::UUID:0x0000010150bb60 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
@@ -51,7 +52,7 @@ uuid.to_s                 # Returns the string representation of the UUID object
 # => '550e8400-e29b-41d4-a716-446655440000'
 
 uuid.to_short_s           # Returns the short string representation of the UUID object
-# => '_oGOAbD9fsFFEHWSMal1v', alias for method: #to_param
+# => '2AuYQJcZeiIeCymkJ7tzTW', alias for method: #to_param
 ```
 
 
