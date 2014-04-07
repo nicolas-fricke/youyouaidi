@@ -66,6 +66,88 @@ describe Youyouaidi::UUID do
     end
   end
 
+  shared_examples_for 'equality check for two UUID objects' do
+    let(:first_uuid_string)  { 'aaaaaaaa-eeee-4444-aaaa-444444444444' }
+    let(:second_uuid_string) { '00000000-bbbb-2222-6666-000000000000' }
+    let(:first_uuid)  { Youyouaidi::UUID.new first_uuid_string }
+    let(:second_uuid) { Youyouaidi::UUID.new second_uuid_string }
+
+    subject { action }
+
+    context 'passing a UUID object' do
+      context 'when comparing same instance' do
+        let(:action) { first_uuid.send described_method, first_uuid }
+        it { should be_true }
+      end
+
+      context 'when comparing different instances' do
+        let(:action) { first_uuid.send described_method, second_uuid }
+        context 'with same UUID strings' do
+          let(:second_uuid_string) { first_uuid_string }
+          it { should be_true }
+        end
+
+        context 'with different UUID strings' do
+            it { should be_false }
+        end
+      end
+    end
+  end
+
+  describe '#== (equal operator)' do
+    let(:uuid_string)  { 'aaaaaaaa-eeee-4444-aaaa-444444444444' }
+    let(:uuid)  { Youyouaidi::UUID.new uuid_string }
+
+    let(:described_method) { :== }
+    it_behaves_like 'equality check for two UUID objects'
+
+    subject { action }
+
+    context 'passing a non-UUID object' do
+      let(:action) { uuid == test_object }
+
+      context 'when this is the UUID as string' do
+        let(:test_object) { uuid_string }
+        it { should be_false }
+      end
+
+      context 'when this is a random other object' do
+        let(:test_object) { '123' }
+        it { should be_false }
+      end
+    end
+  end
+
+  describe '#=== (equal operator)' do
+    let(:uuid_string)  { 'aaaaaaaa-eeee-4444-aaaa-444444444444' }
+    let(:uuid)  { Youyouaidi::UUID.new uuid_string }
+
+    let(:described_method) { :=== }
+    it_behaves_like 'equality check for two UUID objects'
+
+    subject { action }
+
+    context 'passing a non-UUID object' do
+      let(:action) { uuid === test_object }
+
+      context 'when this is the same UUID as string' do
+        context 'when string is upcase' do
+          let(:test_object) { uuid_string.upcase }
+          it { should be_true }
+        end
+        context 'when string is downcase' do
+          let(:test_object) { uuid_string.downcase }
+          it { should be_true }
+        end
+      end
+
+      context 'when this is a random other object' do
+        let(:test_object) { '123' }
+        it { should be_false }
+      end
+    end
+  end
+
   describe '#to_s' do
     let(:uuid_string) { '550e8400-e29b-41d4-a716-446655440000' }
     let(:uuid) { Youyouaidi::UUID.new uuid_string }

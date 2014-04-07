@@ -4,7 +4,17 @@ class Youyouaidi::UUID
   def initialize(uuid_string, options = {})
     @converter = options[:converter] || Youyouaidi::Converter
     raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' could not be converted to valid UUID" unless self.class.valid? uuid_string
-    @uuid = uuid_string.to_s
+    @uuid = uuid_string.to_s.downcase
+  end
+
+  def ==(other_object)
+    return false unless other_object.is_a? self.class
+    self.to_s == other_object.to_s
+  end
+
+  def ===(other_object)
+    return true if self == other_object
+    self.to_s == other_object.to_s.downcase
   end
 
   def to_i
