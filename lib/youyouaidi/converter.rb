@@ -40,9 +40,11 @@ class Youyouaidi::Converter
         total
       end
 
-      def convert_bignum_to_uuid_string(short_uuid_string)
-        uuid = short_uuid_string.to_i.to_s(16)
-        "#{uuid[0,8]}-#{uuid[8,4]}-#{uuid[12,4]}-#{uuid[16,4]}-#{uuid[20,12]}"
+      def convert_bignum_to_uuid_string(decoded_uuid_bignum)
+        decoded_uuid = decoded_uuid_bignum.to_i.to_s(16)
+        parsed_uuid  = "#{decoded_uuid[0,8]}-#{decoded_uuid[8,4]}-#{decoded_uuid[12,4]}-#{decoded_uuid[16,4]}-#{decoded_uuid[20,12]}"
+        raise Youyouaidi::InvalidUUIDError.new "Converted string `#{parsed_uuid}' has too many characters" if decoded_uuid.length > 32
+        parsed_uuid
       end
   end
 end

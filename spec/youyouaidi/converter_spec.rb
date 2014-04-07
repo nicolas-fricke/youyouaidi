@@ -21,16 +21,25 @@ describe Youyouaidi::Converter do
     end
 
     describe '.decode' do
-      subject { described_class.decode encoded_uuid }
+      let(:action) { described_class.decode encoded_param }
 
-      it { should be_a Youyouaidi::UUID }
-      its(:to_s) { should eq uuid_string }
+      context 'with valid param' do
+        let(:encoded_param) { encoded_uuid }
+        subject { action }
+        it { should be_a Youyouaidi::UUID }
+        its(:to_s) { should eq uuid_string }
+      end
 
-      context 'with invalid characters' do
-        let(:encoded_uuid) { ' ' }
+      context 'with invalid param' do
+        subject { -> { action } }
+        context 'with invalid characters' do
+          let(:encoded_param) { ' ' }
+          it { should raise_error Youyouaidi::InvalidUUIDError }
+        end
 
-        it 'raises error' do
-          expect { subject }.to raise_error Youyouaidi::InvalidUUIDError
+        context 'with too long encoded param' do
+          let(:encoded_param) { "#{encoded_uuid}abc" }
+          it { should raise_error Youyouaidi::InvalidUUIDError }
         end
       end
     end
