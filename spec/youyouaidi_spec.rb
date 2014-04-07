@@ -115,7 +115,10 @@ describe Youyouaidi do
       end
 
       context 'with invalid uuid' do
-        invalid_uuids = ['Kekse', 'aa550e8400-e29b-41d4-a716-446655440000']
+        uuid_string   = '550e8400-e29b-41d4-a716-446655440000'
+        encoded_uuid  = '_oGOAbD9fsFFEHWSMal1v'
+        invalid_uuids = ['Kekse', "aa#{uuid_string}", "#{uuid_string}bb",
+          "#{encoded_uuid}" ]
 
         invalid_uuids.each do |invalid_uuid|
           it "should return false for `#{invalid_uuid}`" do
