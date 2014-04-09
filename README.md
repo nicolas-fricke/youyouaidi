@@ -1,5 +1,5 @@
-# Youyouaidi 
-[![Gem Version](https://badge.fury.io/rb/youyouaidi.svg)](https://rubygems.org/gems/youyouaidi) 
+# Youyouaidi
+[![Gem Version](https://badge.fury.io/rb/youyouaidi.svg)](https://rubygems.org/gems/youyouaidi)
 [![Build Status](https://travis-ci.org/nicolas-fricke/youyouaidi.svg)](https://travis-ci.org/nicolas-fricke/youyouaidi)
 [![Coverage Status](http://img.shields.io/coveralls/nicolas-fricke/youyouaidi.svg)](https://coveralls.io/r/nicolas-fricke/youyouaidi)
 [![Code Climate](http://img.shields.io/codeclimate/github/nicolas-fricke/youyouaidi.svg)](https://codeclimate.com/github/nicolas-fricke/youyouaidi)
@@ -48,10 +48,10 @@ uuid = UUID uuid_string
 
 Youyouaidi::UUID.valid? uuid_string # => true
 
-uuid.to_s                 # Returns the string representation of the UUID object
+uuid.to_s        # Returns the string representation of the UUID object
 # => '550e8400-e29b-41d4-a716-446655440000'
 
-uuid.to_short_s           # Returns the short string representation of the UUID object
+uuid.to_short_s  # Returns the short string representation of the UUID object
 # => '2AuYQJcZeiIeCymkJ7tzTW', alias for method: #to_param
 ```
 
@@ -62,7 +62,7 @@ uuid.to_short_s           # Returns the short string representation of the UUID 
 uuid_string  = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
 uuid         = UUID uuid_string
 similar_uuid = UUID uuid_string
-other_uuid   = UUID 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+other_uuid   = UUID '00000000-1111-2222-aaaa-eeeeeeeeeeee'
 
 uuid == similar_uuid # Two UUID objects representing same UUID (#=== behaves similar for this)
 # => true
@@ -79,7 +79,7 @@ uuid === uuid_string # Comparing a UUID object and its string representation wit
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/youyouaidi/fork )
+1. Fork it ( http://github.com/nicolas-fricke/youyouaidi/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
