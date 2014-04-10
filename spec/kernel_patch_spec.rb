@@ -35,4 +35,18 @@ describe Kernel do
       it { should raise_error Youyouaidi::InvalidUUIDError }
     end
   end
+
+  describe 'UUID class behaves as an alias for Youyouaidi::UUID' do
+    describe '.new' do
+      let(:param) { '' }
+      let(:action) { UUID.new param }
+      subject { action }
+
+      context 'without a param' do
+        let(:action) { UUID.new }
+        subject { action }
+        it { should be_a Youyouaidi::UUID }
+      end
+    end
+  end
 end

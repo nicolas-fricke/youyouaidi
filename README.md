@@ -43,6 +43,9 @@ Or install it yourself as:
 
 ## Usage
 
+For usability, `UUID(...)` is patched into the kernel as a shorthand call to `Youyouaidi::UUID.parse(...)`.
+Also, `UUID` is patched as a reference for the class `Youyouid::UUID`.
+
 ### Initializing UUIDs
 
 ```ruby
@@ -68,7 +71,8 @@ new_uuid = UUID()         # generates a random UUID version 4 using the SecureRa
 uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
 uuid = UUID uuid_string
 
-Youyouaidi::UUID.valid? uuid_string # => true
+UUID.valid? uuid_string # Checks if `uuid_string' is a valid UUID, same as Youyouaidi::UUID.valid? uuid_string
+# => true
 
 uuid.to_s        # Returns the string representation of the UUID object
 # => '550e8400-e29b-41d4-a716-446655440000'
