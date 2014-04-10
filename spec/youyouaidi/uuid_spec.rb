@@ -6,6 +6,20 @@ describe Youyouaidi::UUID do
     let(:action) { Youyouaidi::UUID.new param }
     subject { -> { action } }
 
+    context 'without a param' do
+      let(:action) { Youyouaidi::UUID.new }
+      subject { action }
+
+      it { should be_a Youyouaidi::UUID }
+      describe 'having a valid UUID version 4' do
+        subject { action.to_s }
+
+        it { should be_a String }
+        it { should have(36).characters }
+        it { should match /[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}/i }
+      end
+    end
+
     context 'with valid uuid string' do
       subject { action }
 

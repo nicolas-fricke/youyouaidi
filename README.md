@@ -6,8 +6,11 @@
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
 
 
-`Youyouaidi` is a Ruby Gem that offers a UUID class for parsing, validating and converting UUIDs into / from shorter representations.
-While a UUID consists of 32 hexadecimal characters by dashes divided into 5 subgroups, the short representation (invoked via `#to_shrort_string`) consists of exactly 22 digit and lower- and uppercase characters.
+`Youyouaidi` is a Ruby Gem that offers a UUID class for generating, parsing, validating and converting UUIDs into / from shorter representations.
+While a UUID consists of 32 hexadecimal characters by dashes divided into 5 subgroups - which makes 36 characters in total - the short representation (invoked via `#to_shrort_string`) consists of exactly 22 digit and lower- and uppercase characters.
+For UUID generation, the `SecureRandom.uuid` method is used which generates valid, random *version 4* UUIDs.
+
+Find out more about UUIDs and the different versions on [Wikipedia](https://en.wikipedia.org/wiki/Uuid).
 
 ## Installation
 
@@ -37,6 +40,10 @@ uuid = UUID uuid_string   # creates new Youyouaidi::UUID object, patches Youyoua
 # Alternatively a short UUID can be passed:
 uuid = UUID uuid_short    # creates similar Youyouaidi::UUID object
 # => #<Youyouaidi::UUID:0x00000102201b80 @converter=Youyouaidi::Converter, @uuid="550e8400-e29b-41d4-a716-446655440000">
+
+# To generate a new random UUID simply do not pass a parameter:
+new_uuid = UUID()         # generates a random UUID version 4 using the SecureRandom.uuid method
+# => #<Youyouaidi::UUID:0x00000102201b80 @converter=Youyouaidi::Converter, @uuid="27f8bc29-be8e-4dc7-ab30-0295b2a5e902">
 ```
 
 

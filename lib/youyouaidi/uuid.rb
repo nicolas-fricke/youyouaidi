@@ -1,10 +1,15 @@
+require 'SecureRandom'
+
 class Youyouaidi::UUID
   attr_reader :uuid
 
-  def initialize(uuid_string, options = {})
+  def initialize(uuid_string = nil, options = {})
     @converter = options[:converter] || Youyouaidi::Converter
-    raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' could not be converted to valid UUID" unless self.class.valid? uuid_string
-    @uuid = uuid_string.to_s.downcase
+    if uuid_string
+      initialize_with_uuid_string uuid_string
+    else
+      initialize_without_param
+    end
   end
 
   def ==(other_object)
@@ -32,11 +37,22 @@ class Youyouaidi::UUID
 
   private
 
+    def initialize_without_param
+      @uuid = SecureRandom.uuid
+    end
+
+    def initialize_with_uuid_string(uuid_string)
+      raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' could not be converted to valid UUID" unless self.class.valid? uuid_string
+      @uuid = uuid_string.to_s.downcase
+    end
+
   class << self
-    def parse(uuid_param, options = {})
+    def parse(uuid_param = nil, options = {})
       @converter = options[:converter] || Youyouaidi::Converter
       if valid? uuid_param
         self.new uuid_param.to_s, options
+      elsif uuid_param.nil?
+        self.new nil, options
       else
         uuid_obj = @converter.decode uuid_param
         raise Youyouaidi::InvalidUUIDError.new "`#{uuid_param}' could not be converted to valid UUID" unless valid? uuid_obj.to_s

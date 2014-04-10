@@ -14,6 +14,11 @@ describe Kernel do
       its(:to_s) { should eq valid_uuid }
     end
 
+    context 'initialized without a param' do
+      let(:action) { UUID() }
+      it { should be_a Youyouaidi::UUID }
+    end
+
     context 'initialized via valid uuid' do
       let(:param) { valid_uuid }
       it_behaves_like 'a valid UUID object'
