@@ -7,19 +7,23 @@
 
 
 `Youyouaidi` is a Ruby Gem that offers a UUID class for generating, parsing, validating and converting UUIDs into / from shorter representations.
+
 While a UUID consists of 32 hexadecimal characters by dashes divided into 5 subgroups - which makes 36 characters in total - the short representation (invoked via `#to_shrort_string`) consists of exactly 22 digit and lower- and uppercase characters.
+
 For UUID generation, the `SecureRandom.uuid` method is used which generates valid, random *version 4* UUIDs.
 
 This is what a valid, random (version 4) UUID looks like:
 ```
 # chars in group:     8   | 4  | 4  | 4  |    12
-                      v     v    v    v       v
+                      ▼     ▼    ▼    ▼       ▼
                   caed3f49-b0ca-454b-adf8-5ee2a1764759
-                                ˆ    ˆ
+                                ▲    ▲
                           version    either 8, 9
                            number        a, or b
 ```
-As shown, the first digit of the third group indicates the UUID version. The first digit of the fourth group always has to be one of either `8`, `9`, `a`, or `b`. All other digits are randomly assigned hexadecimals.
+As shown, the first digit of the third group indicates the UUID version.
+The first digit of the fourth group always has to be one of either `8`, `9`, `a`, or `b`.
+All other digits are randomly assigned hexadecimals.
 
 Find out more about UUIDs and the different versions on [Wikipedia](https://en.wikipedia.org/wiki/Uuid).
 
