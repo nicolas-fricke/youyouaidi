@@ -1,4 +1,4 @@
-require 'SecureRandom'
+require 'securerandom'
 
 class Youyouaidi::UUID
   attr_reader :uuid
