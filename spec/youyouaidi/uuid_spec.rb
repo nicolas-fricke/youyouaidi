@@ -214,16 +214,21 @@ describe Youyouaidi::UUID do
     subject { Youyouaidi::UUID.valid? param }
 
     context 'with valid uuid' do
-      let(:param) { '550e8400-e29b-41d4-a716-446655440000' }
+      valid_uuids = ['550e8400-e29b-41d4-a716-446655440000',
+                     '27f8bc29-be8e-4dc7-8b30-0295b2a5e902']
 
-      it { should be_true }
+      valid_uuids.each do |valid_uuid|
+        it "should return true for `#{valid_uuid}`" do
+          expect(Youyouaidi::UUID.valid? valid_uuid).to eq true
+        end
+      end
     end
 
     context 'with invalid uuid' do
       uuid_string   = '550e8400-e29b-41d4-a716-446655440000'
       encoded_uuid  = '2AuYQJcZeiIeCymkJ7tzTW'
       invalid_uuids = ['Kekse', "aa#{uuid_string}", "#{uuid_string}bb",
-        "#{encoded_uuid}" ]
+        "#{encoded_uuid}", '550e8400-e29b-41d4-2716-446655440000']
 
       invalid_uuids.each do |invalid_uuid|
         it "should return false for `#{invalid_uuid}`" do
