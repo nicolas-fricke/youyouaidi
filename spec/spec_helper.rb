@@ -4,8 +4,11 @@ require 'bundler'
 Bundler.require
 
 # Code coverage statistics at coveralls.io: https://coveralls.io/r/nicolas-fricke/youyouaidi
-require 'coveralls'
-Coveralls.wear!
+# Generate coverage reports only when using MRI, see: https://github.com/lemurheavy/coveralls-public/issues/144
+if ENV['TRAVIS'] && ENV['COVERALLS'] && RUBY_ENGINE == 'ruby'
+  require 'coveralls'
+  Coveralls.wear!
+end
 
 require 'youyouaidi'
 
