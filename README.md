@@ -67,6 +67,9 @@ new_uuid = UUID()         # generates a random UUID version 4 using the SecureRa
 
 ### Validity check and conversions
 
+The validity check `UUID.valid? uuid_string` checks, if UUID contains exactly 32 hexadecimal characters which are divided by four dashes ('-') into five groups of sizes 8, 4, 4, 4, and 12.
+Also, it validates that the first character of the fourth group is either a `8`, `9`, an `a`, or a `b`.
+
 ```ruby
 uuid_string = '550e8400-e29b-41d4-a716-446655440000' # A valid UUID in string format
 uuid = UUID uuid_string
