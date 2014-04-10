@@ -14,12 +14,11 @@ For UUID generation, the `SecureRandom.uuid` method is used which generates vali
 
 This is what a valid, random (version 4) UUID looks like:
 ```
-# chars in group:     8   | 4  | 4  | 4  |    12
-                      ▼     ▼    ▼    ▼       ▼
-                  caed3f49-b0ca-454b-adf8-5ee2a1764759
-                                ▲    ▲
                           version    either 8, 9
-                           number        a, or b
+                           number    a, or b
+                                ▼    ▼
+                  caed3f49-b0ca-454b-adf8-5ee2a1764759
+# chars in group:     8   | 4  | 4  | 4  |    12
 ```
 As shown, the first digit of the third group indicates the UUID version.
 The first digit of the fourth group always has to be one of either `8`, `9`, `a`, or `b`.
