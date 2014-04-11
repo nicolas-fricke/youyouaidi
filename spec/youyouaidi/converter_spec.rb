@@ -49,12 +49,17 @@ describe Youyouaidi::Converter do
       context 'with invalid param' do
         subject { -> { action } }
         context 'with invalid characters' do
-          let(:encoded_param) { ' ' }
+          let(:encoded_param) { "_#{encoded_uuid[1..-1]}" }
           it { should raise_error Youyouaidi::InvalidUUIDError }
         end
 
         context 'with too long encoded param' do
           let(:encoded_param) { "#{encoded_uuid}abc" }
+          it { should raise_error Youyouaidi::InvalidUUIDError }
+        end
+
+        context 'with too short encoded param' do
+          let(:encoded_param) { "#{encoded_uuid[0..-3]}" }
           it { should raise_error Youyouaidi::InvalidUUIDError }
         end
       end
