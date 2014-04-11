@@ -1,14 +1,17 @@
 require 'rspec'
 
+# Code coverage statistics at coveralls.io: https://coveralls.io/r/nicolas-fricke/youyouaidi
+# Do not generate coverage when using Rubinius, see: https://github.com/lemurheavy/coveralls-public/issues/144
+if ENV['CI'] || (defined?(:RUBY_ENGINE) && RUBY_ENGINE != 'rbx')
+  require 'coveralls'
+  Coveralls.wear! do
+    add_filter 'spec'
+  end
+end
+
+
 require 'bundler'
 Bundler.require
-
-# Code coverage statistics at coveralls.io: https://coveralls.io/r/nicolas-fricke/youyouaidi
-# Generate coverage reports only when using MRI, see: https://github.com/lemurheavy/coveralls-public/issues/144
-if ENV['TRAVIS'] && ENV['COVERALLS'] && RUBY_ENGINE == 'ruby'
-  require 'coveralls'
-  Coveralls.wear!
-end
 
 require 'youyouaidi'
 
