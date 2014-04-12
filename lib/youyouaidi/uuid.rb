@@ -42,7 +42,7 @@ class Youyouaidi::UUID
     end
 
     def initialize_with_uuid_string(uuid_string)
-      raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' could not be converted to valid UUID" unless self.class.valid? uuid_string
+      raise Youyouaidi::InvalidUUIDError.new "`#{uuid_string}' does not look like a valid UUID" unless self.class.valid? uuid_string
       @uuid = uuid_string.to_s.downcase
     end
 
@@ -54,9 +54,7 @@ class Youyouaidi::UUID
       elsif uuid_param.nil?
         self.new nil, options
       else
-        uuid_obj = @converter.decode uuid_param
-        raise Youyouaidi::InvalidUUIDError.new "`#{uuid_param}' could not be converted to valid UUID" unless valid? uuid_obj.to_s
-        uuid_obj
+        @converter.decode uuid_param
       end
     end
 

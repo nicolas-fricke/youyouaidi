@@ -8,8 +8,14 @@ class Youyouaidi::Converter
 
     def decode(encoded_uuid)
       encoded_uuid = encoded_uuid.to_s
-      raise Youyouaidi::InvalidUUIDError.new "`#{encoded_uuid}' needs to have exactly #{ENCODED_LENGTH} characters" unless encoded_uuid.length == ENCODED_LENGTH
-      Youyouaidi::UUID.new convert_bignum_to_uuid_string base_decode encoded_uuid
+      raise Youyouaidi::InvalidUUIDError.new(
+        "`#{encoded_uuid}' needs to have exactly #{ENCODED_LENGTH} characters (has #{encoded_uuid.length})"
+      ) unless encoded_uuid.length == ENCODED_LENGTH
+      begin
+        Youyouaidi::UUID.new convert_bignum_to_uuid_string base_decode encoded_uuid
+      rescue Youyouaidi::InvalidUUIDError => error
+        raise Youyouaidi::InvalidUUIDError.new "`#{encoded_uuid}' could not be decoded to a valid UUID (#{error.message})"
+      end
     end
 
     private
@@ -20,7 +26,7 @@ class Youyouaidi::Converter
         raise Youyouaidi::InvalidUUIDError.new "`#{numeric}' needs to be a Numeric" unless numeric.is_a? Numeric
 
         return '0' if numeric == 0
-        s = ''
+        s = String.new
 
         while numeric > 0
           s << BASE[numeric.modulo(BASE.size)]
@@ -40,7 +46,7 @@ class Youyouaidi::Converter
           if ord = BASE.index(char)
             total += ord * (BASE.size ** index)
           else
-            raise Youyouaidi::InvalidUUIDError.new "`#{encoded_numeric}' has `#{char}' which is not valid"
+            raise Youyouaidi::InvalidUUIDError.new "`#{encoded_numeric}' has `#{char}' which is not a valid character"
           end
         end
         total
@@ -48,9 +54,7 @@ class Youyouaidi::Converter
 
       def convert_bignum_to_uuid_string(decoded_uuid_bignum)
         decoded_uuid = decoded_uuid_bignum.to_i.to_s(16).rjust(32, '0')
-        parsed_uuid  = "#{decoded_uuid[0,8]}-#{decoded_uuid[8,4]}-#{decoded_uuid[12,4]}-#{decoded_uuid[16,4]}-#{decoded_uuid[20,12]}"
-        raise Youyouaidi::InvalidUUIDError.new "Converted string `#{decoded_uuid}' has too many characters" if decoded_uuid.length > 32
-        parsed_uuid
+        "#{decoded_uuid[0,8]}-#{decoded_uuid[8,4]}-#{decoded_uuid[12,4]}-#{decoded_uuid[16,4]}-#{decoded_uuid[20,12]}"
       end
   end
 end

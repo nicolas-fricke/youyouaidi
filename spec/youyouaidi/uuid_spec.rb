@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe Youyouaidi::UUID do
+  shared_examples_for 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message' do
+    describe 'raises error' do
+      subject { -> { action } }
+      it { should raise_error Youyouaidi::InvalidUUIDError }
+      describe 'error message' do
+        let(:caught_error) do
+          begin
+            action
+            return nil
+          rescue Youyouaidi::InvalidUUIDError => error
+            return error
+          end
+        end
+        subject { caught_error }
+        it { should_not be_nil }
+        its(:message) { should include(*error_message_includes) }
+      end
+    end
+  end
+
   describe '.new' do
     let(:param) { '' }
     let(:action) { Youyouaidi::UUID.new param }
@@ -37,19 +57,22 @@ describe Youyouaidi::UUID do
       end
     end
 
-    context 'with uuid in short format' do
+    context 'with valid uuid in short format' do
       let(:param) { '2AuYQJcZeiIeCymkJ7tzTW' }
-      it { should raise_error Youyouaidi::InvalidUUIDError }
+      let(:error_message_includes) { "`#{param}'" }
+      it_behaves_like 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message'
     end
 
     context 'with invalid uuid string' do
       let(:param) { 'Kekse' }
-      it { should raise_error Youyouaidi::InvalidUUIDError }
+      let(:error_message_includes) { "`#{param}'" }
+      it_behaves_like 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message'
     end
 
     context 'with non-uuid-string input' do
       let(:param) { 1234 }
-      it { should raise_error Youyouaidi::InvalidUUIDError }
+      let(:error_message_includes) { "`#{param.to_s}'" }
+      it_behaves_like 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message'
     end
   end
 
@@ -74,18 +97,14 @@ describe Youyouaidi::UUID do
 
     context 'with invalid uuid string' do
       let(:param) { 'Kekse' }
-
-      it 'raises error' do
-        expect { Youyouaidi::UUID.parse param }.to raise_error Youyouaidi::InvalidUUIDError
-      end
+      let(:error_message_includes) { "`#{param}'" }
+      it_behaves_like 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message'
     end
 
     context 'with non-string input' do
       let(:param) { 1234 }
-
-      it 'raises error' do
-        expect { Youyouaidi::UUID.parse param }.to raise_error Youyouaidi::InvalidUUIDError
-      end
+      let(:error_message_includes) { "`#{param.to_s}'" }
+      it_behaves_like 'a call that raises a Youyouaidi::InvalidUUIDError with a meaningful error message'
     end
   end
 
