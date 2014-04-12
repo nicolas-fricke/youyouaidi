@@ -34,6 +34,12 @@ describe Kernel do
       subject { -> { action } }
       it { should raise_error Youyouaidi::InvalidUUIDError }
     end
+
+    context 'called on another object' do
+      let(:action) { Object.UUID }
+      subject { -> { action } }
+      it { should raise_error NameError }
+    end
   end
 
   describe 'UUID class behaves as an alias for Youyouaidi::UUID' do
