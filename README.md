@@ -8,7 +8,7 @@
 
 `Youyouaidi` is a Ruby Gem that offers a UUID class for **generating**, **parsing**, **validating** and **converting** UUIDs into / from **shorter representations**.
 
-While a **UUID consists of 36 characters** – 32 hexadecimal characters, divided by four dashes into five subgroups – the **short representation** (invoked via `#to_shrort_string`) consists of exactly **22 digit and lower- and uppercase characters**.
+While a **UUID consists of 36 characters** – 32 hexadecimal characters, divided by four dashes into five subgroups – the **short representation** (invoked via `#to_short_string`) consists of exactly **22 digit and lower- and uppercase characters**.
 
 This is what a valid, random (version 4) UUID looks like:
 ```
@@ -78,11 +78,11 @@ uuid = UUID uuid_string
 UUID.valid? uuid_string # Checks if `uuid_string' is a valid UUID, same as Youyouaidi::UUID.valid? uuid_string
 # => true
 
-uuid.to_s        # Returns the string representation of the UUID object
+uuid.to_s               # Returns the string representation of the UUID object
 # => '550e8400-e29b-41d4-a716-446655440000'
 
-uuid.to_short_s  # Returns the short string representation of the UUID object
-# => '2AuYQJcZeiIeCymkJ7tzTW', alias for method: #to_param
+uuid.to_short_string    # Returns the short string representation of the UUID object, #to_param is an alias for this method
+# => '2AuYQJcZeiIeCymkJ7tzTW'
 ```
 
 
