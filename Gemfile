@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rspec'
+gem 'rspec', '~> 2.99'
 gem 'coveralls', require: false
 
 group :test do

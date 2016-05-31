@@ -150,10 +150,20 @@ describe Youyouaidi::UUID do
 
       context 'when this is the UUID as string' do
         let(:test_object) { uuid_string }
+        it { should be_true }
+      end
+
+      context 'when this is the UUID as string upcase' do
+        let(:test_object) { uuid_string.upcase }
+        it { should be_true }
+      end
+
+      context 'when this is a different UUID string' do
+        let(:test_object) { 'bbbbbbbb-eeee-4444-bbbb-444444444444' }
         it { should be_false }
       end
 
-      context 'when this is a random other object' do
+      context 'when this is a non-UUID string' do
         let(:test_object) { '123' }
         it { should be_false }
       end
@@ -172,18 +182,22 @@ describe Youyouaidi::UUID do
     context 'passing a non-UUID object' do
       let(:action) { uuid === test_object }
 
-      context 'when this is the same UUID as string' do
-        context 'when string is upcase' do
-          let(:test_object) { uuid_string.upcase }
-          it { should be_true }
-        end
-        context 'when string is downcase' do
-          let(:test_object) { uuid_string.downcase }
-          it { should be_true }
-        end
+      context 'when this is the UUID as string' do
+        let(:test_object) { uuid_string }
+        it { should be_false }
       end
 
-      context 'when this is a random other object' do
+      context 'when this is the UUID as string upcase' do
+        let(:test_object) { uuid_string.upcase }
+        it { should be_false }
+      end
+
+      context 'when this is a different UUID string' do
+        let(:test_object) { 'bbbbbbbb-eeee-4444-bbbb-444444444444' }
+        it { should be_false }
+      end
+
+      context 'when this is a non-UUID string' do
         let(:test_object) { '123' }
         it { should be_false }
       end
