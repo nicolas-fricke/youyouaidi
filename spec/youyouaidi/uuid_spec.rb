@@ -168,28 +168,18 @@ describe Youyouaidi::UUID do
         it { should be_false }
       end
     end
-  end
 
-  describe '#=== (equal operator)' do
-    let(:uuid_string)  { 'aaaaaaaa-eeee-4444-aaaa-444444444444' }
-    let(:uuid)  { Youyouaidi::UUID.new uuid_string }
-
-    let(:described_method) { :=== }
-    it_behaves_like 'equality check for two UUID objects'
-
-    subject { action }
-
-    context 'passing a non-UUID object' do
-      let(:action) { uuid === test_object }
+    context 'passing UUID to something' do
+      let(:action) { test_object == uuid }
 
       context 'when this is the UUID as string' do
         let(:test_object) { uuid_string }
-        it { should be_false }
+        it { should be_true }
       end
 
       context 'when this is the UUID as string upcase' do
         let(:test_object) { uuid_string.upcase }
-        it { should be_false }
+        it { should be_true }
       end
 
       context 'when this is a different UUID string' do

@@ -13,11 +13,7 @@ class Youyouaidi::UUID
   end
 
   def ==(other_object)
-    self.to_s == other_object.to_s.downcase
-  end
-
-  def ===(other_object)
-    other_object.is_a?(self.class) && @uuid === other_object.to_s
+    @uuid == other_object.to_s.downcase
   end
 
   def to_i
@@ -27,6 +23,8 @@ class Youyouaidi::UUID
   def to_s
     @uuid
   end
+
+  alias :to_str :to_s
 
   def to_short_string
     @converter.encode self
